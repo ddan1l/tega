@@ -1,3 +1,4 @@
 [submodule "tega-backend"]
 	path = tega-backend
 	url = https://github.com/ddan1l/tega-backend
+	branch = master
