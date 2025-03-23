@@ -2,3 +2,6 @@
 	path = tega-backend
 	url = https://github.com/ddan1l/tega-backend
 	branch = master
+[submodule "tega-frontend"]
+	path = tega-frontend
+	url = https://github.com/ddan1l/tega-frontend.git
