@@ -1,3 +1,3 @@
 [submodule "tega-api"]
-	path = tega-api
+	path = tega-backend
 	url = https://github.com/ddan1l/tega-api
