@@ -15,6 +15,12 @@ services:
   backend:
     build: ./tega-backend
     volumes:
-      - ./tega-backend:/app/tega-backend
+      - ./tega-backend:/app
     ports:
       - "8080:8080"
+  frontend:
+    build: ./tega-frontend
+    volumes:
+      - ./tega-frontend:/app
+    ports:
+      - "3000:3000"
