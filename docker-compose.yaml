@@ -46,10 +46,21 @@ services:
       - ./tega-backend:/app
     ports:
       - "8080:8080"
-  # frontend:
-  #   container_name: frontend
-  #   build: ./tega-frontend
-  #   volumes:
-  #     - ./tega-frontend:/app
-  #   ports:
-  #     - "3000:3000"
+  swagger:
+    container_name: swagger
+    build: ./tega-common/swagger
+    networks:
+      - my_net
+    depends_on:
+      - backend
+    volumes:
+      - ./tega-common/swagger:/app
+    ports:
+      - "8081:8081"
+  frontend:
+    container_name: frontend
+    build: ./tega-frontend
+    volumes:
+      - ./tega-frontend:/app
+    ports:
+      - "3000:3000"
