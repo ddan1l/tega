@@ -6,7 +6,3 @@
 	path = tega-frontend
 	url = https://github.com/ddan1l/tega-frontend.git
 	branch = master
-[submodule "tega-common"]
-	path = tega-common
-	url = https://github.com/ddan1l/tega-common.git
-	branch = master
