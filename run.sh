@@ -1,1 +1,0 @@
-docker-compose -f tega-api/docker-compose.yaml up
