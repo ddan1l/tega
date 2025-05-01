@@ -23,13 +23,13 @@ services:
     image: postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: tega
-      POSTGRES_PASSWORD: 123
-      POSTGRES_DB: tega
+      POSTGRES_USER: ${DB_USER:-tega}
+      POSTGRES_PASSWORD: ${DB_USER:-DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME:-tega}
     networks:
       - my_net
     ports:
-      - "5432:5432"
+      - "${DB_PORT:-5432}:${DB_PORT:-5432}"
     volumes:
       - /var/lib/postgres-data:/var/lib/postgresql/data
   pgadmin:
@@ -38,7 +38,7 @@ services:
     depends_on:
       - db
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.admin
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.admin}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_SERVER_MODE: 'False'
     volumes:
@@ -46,8 +46,8 @@ services:
     networks:
       - my_net
     ports:
-      - "5050:80"
-    user: "5050:5050"
+      - "${PGADMIN_PORT:-5050}:${PGADMIN_PORT:-5050}"
+    user: "${PGADMIN_PORT:-5050}:${PGADMIN_PORT:-5050}"
     restart: unless-stopped
   backend:
     container_name: backend
@@ -58,19 +58,23 @@ services:
       - db
     volumes:
       - ./tega-backend:/app
+    env_file:
+      - ./.env 
     ports:
-      - "8080:8080"
+      - "${BACKEND_PORT:-8080}:${BACKEND_PORT:-8080}"
   frontend:
     container_name: frontend
     build: ./tega-frontend
     restart: always
     environment:
       - NODE_ENV=development
-      - PORT=3000
+      - PORT=${FRONTEND_PORT:-3000}
     volumes:
       - ./tega-frontend:/app
       - /app/node_modules
+    env_file:
+      - ./tega-frontend/.env 
     ports:
-      - "3000:3000"
+      - "${FRONTEND_PORT:-3000}:${FRONTEND_PORT:-3000}"
     networks:
       - my_net
